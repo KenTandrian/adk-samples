@@ -14,12 +14,14 @@
 
 """Domain_create_agent: for suggesting meanigful DNS domain"""
 
+import os
+
 from google.adk import Agent
 from google.adk.tools import google_search
 
 from . import prompt
 
-MODEL = "gemini-2.5-pro" 
+MODEL = os.getenv("MODEL_NAME", "gemini-2.5-pro")
 
 domain_create_agent = Agent(
     model=MODEL,

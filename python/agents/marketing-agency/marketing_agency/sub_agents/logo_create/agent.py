@@ -14,13 +14,15 @@
 
 """logo_create_agent: for creating logos"""
 
+import os
+
 from google.adk import Agent
 from google.adk.tools import ToolContext, load_artifacts
 from google.genai import Client, types
 
 from . import prompt
 
-MODEL = "gemini-2.5-pro"
+MODEL = os.getenv("MODEL_NAME", "gemini-2.5-pro")
 MODEL_IMAGE = "imagen-4.0-generate-001"
 
 

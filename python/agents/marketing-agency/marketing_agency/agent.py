@@ -14,6 +14,8 @@
 
 """Marketing_coordinator Agent assists in creating effective online content."""
 
+import os
+
 from google.adk.agents import LlmAgent
 from google.adk.tools.agent_tool import AgentTool
 
@@ -23,7 +25,7 @@ from .sub_agents.logo_create import logo_create_agent
 from .sub_agents.marketing_create import marketing_create_agent
 from .sub_agents.website_create import website_create_agent
 
-MODEL = "gemini-2.5-pro" 
+MODEL = os.getenv("MODEL_NAME", "gemini-2.5-pro")
 
 marketing_coordinator = LlmAgent(
     name="marketing_coordinator",
