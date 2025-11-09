@@ -21,7 +21,7 @@ from google.genai import Client, types
 from . import prompt
 
 MODEL = "gemini-2.5-pro"
-MODEL_IMAGE = "imagen-3.0-generate-002"
+MODEL_IMAGE = "imagen-4.0-generate-001"
 
 
 async def generate_image(img_prompt: str, tool_context: "ToolContext"):
@@ -33,6 +33,10 @@ async def generate_image(img_prompt: str, tool_context: "ToolContext"):
         config={"number_of_images": 1},
     )
     if not response.generated_images:
+        return {"status": "failed"}
+    if not response.generated_images[0].image:
+        return {"status": "failed"}
+    if not response.generated_images[0].image.image_bytes:
         return {"status": "failed"}
     image_bytes = response.generated_images[0].image.image_bytes
     await tool_context.save_artifact(
